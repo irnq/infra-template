@@ -10,5 +10,5 @@ jobs:
         with:
           node-version: '16.16.0'
           cache: 'npm'
-      - if: ./gh-test.sh && startsWith(github.head_ref, 'releases/')
-        run: ./gh-build.sh
+      - if: ('./gh-test.sh' && startsWith(github.head_ref, 'releases/'))
+        run: './gh-build.sh'
