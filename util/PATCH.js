@@ -6,7 +6,9 @@ console.log('Начинаем выполнять запрос в Трекер!')
 console.log('------');
 console.log(github.actor);
 console.log(new Date().toLocaleDateString());
+
 if (github.payload) {
+  console.log('commit:');
   github.payload.commits.forEach((commit) => console.log(commit));
 }
 
