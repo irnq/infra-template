@@ -15,7 +15,7 @@ const options = {
   method: 'PATCH',
   headers: {
     OrgId: process.env.ORG_ID,
-    Authorization: process.env.OAUTH_TOKEN,
+    Authorization: `OAuth ${process.env.OAUTH_TOKEN}`,
     'content-type': 'application/json',
   },
 };
