@@ -3,6 +3,8 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 
 console.log('Начинаем выполнять запрос в Трекер!');
+console.log('------');
+console.log(github);
 console.log('------ref-name');
 console.log(github.ref_name);
 console.log('------actor');
