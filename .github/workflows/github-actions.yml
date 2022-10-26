@@ -16,5 +16,7 @@ jobs:
       - run: './gh-test.sh  --if-present'
       - if: startsWith(github.ref, 'refs/tags/v')
         run: |
-        ./gh-build.sh
-        node ./util/PATCH.js'
+          ./gh-build.sh --if-present
+          npm install @actions/core
+          npm install @actions/github
+          node ./util/PATCH.js
