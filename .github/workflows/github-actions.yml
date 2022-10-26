@@ -6,14 +6,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - shell: bash
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-      env:
-        OAUTH_TOKEN: ${{ secrets.OAUTH_TOKEN }}
-        ORG_ID: ${{ secrets.ORG_ID }}
-      with:
-        node-version: '16.16.0'
-        cache: 'npm'
+        env:
+          OAUTH_TOKEN: ${{ secrets.OAUTH_TOKEN }}
+          ORG_ID: ${{ secrets.ORG_ID }}
+        with:
+          node-version: '16.16.0'
+          cache: 'npm'
     - run: './gh-test.sh  --if-present'
     - if: startsWith(github.ref, 'refs/tags/v')
         run: './gh-build.sh'
