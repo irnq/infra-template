@@ -19,15 +19,15 @@ console.log('------version');
 console.log(core.getInput('version'));
 console.log(new Date().toLocaleDateString());
 
-if (github.payload) {
-  console.log('commit:');
-  github.payload.commits.forEach((commit) => console.log(commit));
-}
+const date = new Date().toLocaleDateString();
 
 const patchBody = JSON.stringify({
-  summary: '*номер и дата релиза*',
-  description:
-    ' ответственный за релиз <имя того, кто запушил тег>\n коммиты, попавшие в релиз:\n <хеш коммита> <автор коммита> <описание коммита>\n <хеш коммита> <автор коммита> <описание коммита>]\n <хеш коммита> <автор коммита> <описание коммита>\n',
+  summary: `номер от ${date}`,
+  description: ` ответственный за релиз <имя того, кто запушил тег>
+     коммиты, попавшие в релиз:
+     <хеш коммита> <автор коммита> <описание коммита>
+     <хеш коммита> <автор коммита> <описание коммита>]
+     <хеш коммита> <автор коммита> <описание коммита>`,
 });
 
 const options = {
