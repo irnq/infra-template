@@ -1,7 +1,14 @@
 const http = require('https');
+const core = require('@actions/core');
+const github = require('@actions/github');
 
 console.log('Начинаем выполнять запрос в Трекер!');
-console.log('my phone number, ', process.env.ORG_ID);
+console.log('------');
+console.log(github.actor);
+console.log(new Date().toLocaleDateString());
+if (github.payload) {
+  github.payload.commits.forEach((commit) => console.log(commit));
+}
 
 const patchBody = JSON.stringify({
   summary: '*номер и дата релиза*',
