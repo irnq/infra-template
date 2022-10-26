@@ -10,7 +10,7 @@ const patchBody = JSON.stringify({
 });
 
 const options = {
-  host: 'https://api.tracker.yandex.net',
+  host: 'api.tracker.yandex.net',
   path: '/v2/issues/HOMEWORKSHRI-142',
   method: 'PATCH',
   headers: {
