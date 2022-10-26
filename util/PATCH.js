@@ -16,7 +16,7 @@ const options = {
   headers: {
     OrgId: process.env.ORG_ID,
     Authorization: process.env.OAUTH_TOKEN,
-    'Content-Type': 'application/json',
+    'content-type': 'application/json',
   },
 };
 
