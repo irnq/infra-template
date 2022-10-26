@@ -1,10 +1,14 @@
 const http = require('https');
-// const core = require('@actions/core');
+const core = require('@actions/core');
 const github = require('@actions/github');
 
 console.log('Начинаем выполнять запрос в Трекер!');
-console.log('------');
-console.log(github.actor);
+console.log('------ref-name');
+console.log(github.ref_name);
+console.log('------actor');
+console.log(core.getInput('actor'));
+console.log('------commits');
+console.log(core.getInput('commits'));
 console.log(new Date().toLocaleDateString());
 
 if (github.payload) {
