@@ -11,6 +11,8 @@ console.log('------actor');
 console.log(core.getInput('actor'));
 console.log('------commits');
 console.log(core.getInput('commits'));
+console.log('------version');
+console.log(core.getInput('version'));
 console.log(new Date().toLocaleDateString());
 
 if (github.payload) {

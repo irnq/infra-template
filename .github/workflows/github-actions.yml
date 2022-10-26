@@ -14,7 +14,8 @@ jobs:
           node-version: '16.16.0'
           cache: 'npm'
           actor: ${{ github.actor }}
-          commits: ${{ github }}
+          version: ${{ github.ref}}
+          commits: ${{ github.commits }}
       - run: './gh-test.sh  --if-present'
       - if: startsWith(github.ref, 'refs/tags/v')
         run: |
