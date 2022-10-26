@@ -1,4 +1,4 @@
-const http = require('http');
+const http = require('https');
 
 console.log('Начинаем выполнять запрос в Трекер!');
 console.log('my phone number, ', process.env.ORG_ID);
@@ -35,6 +35,7 @@ let req = http.request(options, callback);
 
 req.on('error', (e) => {
   console.error(e);
+  throw new Error(`Запрос завершился ошибкой: ${e}`);
 });
 
 req.write(patchBody);
