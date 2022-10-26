@@ -1,7 +1,7 @@
 #!/bin/bash
-export msg_error="\033[31m"
-export msg_ok="\033[32m"
-export msg_common="\033[0m"
+msg_error="\033[31m"
+msg_ok="\033[32m"
+msg_common="\033[0m"
 echo "Начинаем..."
 
 echo "#1. Установка зависимостей:"

@@ -1,4 +1,7 @@
 #!/bin/bash
+msg_error="\033[31m"
+msg_ok="\033[32m"
+msg_common="\033[0m"
 echo "Начинаем сборку проекта..."
 
 if npm run build
