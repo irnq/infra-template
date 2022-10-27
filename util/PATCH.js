@@ -16,6 +16,8 @@ const commitsString = commits.reduce((result, commit) => {
   );
 }, '');
 
+console.log(commits);
+
 const description = `ответственный за релиз ${actor}
 коммиты попавшие в релиз:
 ${commitsString}`;
