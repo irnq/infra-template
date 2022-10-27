@@ -19,20 +19,13 @@ const date = new Date().toLocaleDateString();
     .filter((tag) => tag.name.slice(0, 3) === 'rc-')
     .sort((a, b) => (a > b ? -1 : 1));
 
-  console.log(tags);
-
-  console.log(commits);
-
   const prevTagId = tags[1].commit.sha;
-  console.log('prevTagId: ', prevTagId);
 
   const title = `Релиз №${version} от ${date}`;
 
   const prevTagIndex = commits.findIndex((commit) => commit.id === prevTagId);
-  console.log('prevTagIndex: ', prevTagIndex);
 
   const diffCommits = commits.slice(prevTagIndex + 1);
-  console.log('diffCommits: ', diffCommits);
 
   const commitsString = diffCommits.reduce((result, commit) => {
     return (
@@ -53,7 +46,7 @@ ${commitsString}`;
   });
 
   const commentBody = JSON.stringify({
-    text: `${process.env.PROJECT}:rc-${version}`,
+    text: `Создан образ с тегом: ${process.env.PROJECT}:rc-${version}`,
   });
 
   const options = {
@@ -110,6 +103,3 @@ ${commitsString}`;
 
   console.log('данные успешно записаны в трекер!');
 })();
-
-/* test */
-/* test */
