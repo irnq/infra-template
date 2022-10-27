@@ -11,7 +11,7 @@ const title = `${version} от ${date}`;
 const commitsString = commits.reduce((result, commit) => {
   return (
     result +
-    `<${commit.id}> <${commit.author.name}> <${commit.message}>
+    `${commit.id}  -  ${commit.author.name}  -  ${commit.message};
   `
   );
 }, '');
