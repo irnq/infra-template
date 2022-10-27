@@ -17,10 +17,8 @@ const commitsString = commits.reduce((result, commit) => {
 }, '');
 
 console.log(commits);
-console.log('repository');
-console.log(github.context.repository);
-console.log('octokit');
-console.log(github.getOctokit(process.env.GH_PAT));
+
+console.log(github.getOctokit(process.env.GH_PAT).rest.repos.listTags());
 
 const description = `ответственный за релиз {orange}(${actor})
 ---
