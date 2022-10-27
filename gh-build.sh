@@ -20,12 +20,3 @@ else
 echo -e "$msg_error Ошибка при установке @actions/github! $msg_common"
 exit 1
 fi
-
-# echo "Добавим информацию в трекер..."
-# if node ./util/PATCH.js
-# then
-# echo -e "$msg_ok ОК: Информация внесена в трекер! $msg_common"
-# else
-# echo -e "$msg_error Произошла ошибка при обращении к трекеру! $msg_common"
-# exit 1
-# fi
