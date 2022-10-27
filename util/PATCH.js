@@ -6,30 +6,27 @@ const version = github.context.ref.split('/').at(-1).replace('rc-', '');
 const commits = github.context.payload.commits;
 const date = new Date().toLocaleDateString();
 
-const title = `Релиз №${version} от ${date}`;
-
-const commitsString = commits.reduce((result, commit) => {
-  return (
-    result +
-    `${commit.id}  -  ${commit.author.name}  -  ${commit.message};
-  `
-  );
-}, '');
-
-console.log(commits);
-
 (async () => {
   const tagsRes = await github
     .getOctokit(process.env.GH_PAT)
     .rest.repos.listTags({ owner: 'irnq', repo: 'infra-template' });
-  const tags = tagsRes.data;
+  const tags = tagsRes.data.filter((tag) => tag.name.slice(0, 3) === 'rc-');
 
-  console.log(tags.sort((a, b) => (a > b ? 1 : -1)));
+  const prevTagId = tags.sort((a, b) => (a > b ? -1 : 1))[1].commit.sha;
 
-  console.log(tags[0].name);
-  console.log(tags[0].commit);
-  console.log(tags.at(-1).name);
-  console.log(tags.at(-1).commit);
+  const title = `Релиз №${version} от ${date}`;
+
+  const prevTagIndex = commits.findIndexOf((commit) => commit.id === prevTagId);
+
+  const diffCommits = commits.slice(prevTagIndex);
+
+  const commitsString = diffCommits.reduce((result, commit) => {
+    return (
+      result +
+      `${commit.id}  -  ${commit.author.name}  -  ${commit.message};
+  `
+    );
+  }, '');
 
   const description = `ответственный за релиз {orange}(${actor})
 ---
