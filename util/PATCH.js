@@ -20,7 +20,7 @@ console.log(commits);
 
 github
   .getOctokit(process.env.GH_PAT)
-  .rest.repos.listTags()
+  .rest.repos.listTags('irnq', 'infra-template')
   .then((data) => {
     console.log(data);
   });
