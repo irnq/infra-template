@@ -2,11 +2,11 @@ const http = require('https');
 const github = require('@actions/github');
 
 const actor = github.context.actor;
-const version = github.context.ref.split('/').at(-1);
+const version = github.context.ref.split('/').at(-1).replace('rc-', '');
 const commits = github.context.payload.commits;
 const date = new Date().toLocaleDateString();
 
-const title = `${version} от ${date}`;
+const title = `Релиз №${version} от ${date}`;
 
 const commitsString = commits.reduce((result, commit) => {
   return (
@@ -18,7 +18,8 @@ const commitsString = commits.reduce((result, commit) => {
 
 console.log(commits);
 
-const description = `ответственный за релиз ${actor}
+const description = `ответственный за релиз {orange}(${actor})
+---
 коммиты попавшие в релиз:
 ${commitsString}`;
 
