@@ -10,6 +10,11 @@ const date = new Date().toLocaleDateString();
   const tagsRes = await github
     .getOctokit(process.env.GH_PAT)
     .rest.repos.listTags({ owner: 'irnq', repo: 'infra-template' });
+
+  if (tagsRes.status !== 200) {
+    throw new Error(`Произошла ошибка при получении данных octokit ${tagsRes.status}`);
+  }
+
   const tags = tagsRes.data.filter((tag) => tag.name.slice(0, 3) === 'rc-');
 
   const prevTagId = tags.sort((a, b) => (a > b ? -1 : 1))[1].commit.sha;
