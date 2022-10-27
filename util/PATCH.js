@@ -52,10 +52,25 @@ ${commitsString}`;
     description,
   });
 
+  const commentBody = JSON.stringify({
+    text: `${process.env.PROJECT}:rc-${version}`,
+  });
+
   const options = {
     host: 'api.tracker.yandex.net',
     path: '/v2/issues/HOMEWORKSHRI-142',
     method: 'PATCH',
+    headers: {
+      OrgId: process.env.ORG_ID,
+      Authorization: `OAuth ${process.env.OAUTH_TOKEN}`,
+      'content-type': 'application/json',
+    },
+  };
+
+  const commentOptions = {
+    host: 'api.tracker.yandex.net',
+    path: '/v2/issues/HOMEWORKSHRI-142/comments',
+    method: 'POST',
     headers: {
       OrgId: process.env.ORG_ID,
       Authorization: `OAuth ${process.env.OAUTH_TOKEN}`,
@@ -82,6 +97,15 @@ ${commitsString}`;
   });
 
   req.write(patchBody);
+  req.end();
+
+  req = http.request(commentOptions, callback);
+  req.on('error', (e) => {
+    console.error(e);
+    throw new Error(`Запрос завершился ошибкой: ${e}`);
+  });
+
+  req.write(commentBody);
   req.end();
 
   console.log('данные успешно записаны в трекер!');
