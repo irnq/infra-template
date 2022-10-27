@@ -1,6 +1,7 @@
 name: test and build on release
 run-name: ${{ github.actor }} is learning GitHub Actions
 env:
+  PROJECT: infra-template
   OAUTH_TOKEN: ${{ secrets.OAUTH_TOKEN }}
   ORG_ID: ${{ secrets.ORG_ID }}
   GH_PAT: ${{ secrets.GH_PAT }}
@@ -14,8 +15,11 @@ jobs:
         with:
           node-version: '16.16.0'
           cache: 'npm'
+      - name: run tests
       - run: './gh-test.sh --if-present'
       - if: startsWith(github.ref, 'refs/tags/rc-0.0.')
+        name: run build
         run: |
           ./gh-build.sh --if-present
+          docker build . -t ${{ env.PROJECT }}:${{ github.ref_name }}
           node ./util/PATCH.js
