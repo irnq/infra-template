@@ -13,7 +13,7 @@ exit 1
 fi
 
 echo "устновим @actions/github:"
-if npm i @actions/github
+if npm install '@actions/github'
 then
 echo -e "$msg_ok ОК: успешно! $msg_common"
 else
