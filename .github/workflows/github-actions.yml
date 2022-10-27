@@ -15,10 +15,8 @@ jobs:
         with:
           node-version: '16.16.0'
           cache: 'npm'
-      - name: run tests
       - run: './gh-test.sh --if-present'
       - if: startsWith(github.ref, 'refs/tags/rc-0.0.')
-        name: run build
         run: |
           ./gh-build.sh --if-present
           docker build . -t ${{ env.PROJECT }}:${{ github.ref_name }}
