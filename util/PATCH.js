@@ -15,15 +15,24 @@ const date = new Date().toLocaleDateString();
     throw new Error(`Произошла ошибка при получении данных octokit ${tagsRes.status}`);
   }
 
-  const tags = tagsRes.data.filter((tag) => tag.name.slice(0, 3) === 'rc-');
+  const tags = tagsRes.data
+    .filter((tag) => tag.name.slice(0, 3) === 'rc-')
+    .sort((a, b) => (a > b ? -1 : 1));
 
-  const prevTagId = tags.sort((a, b) => (a > b ? -1 : 1))[1].commit.sha;
+  console.log(tags);
+
+  console.log(commits.slice(10));
+
+  const prevTagId = tags[1].commit.sha;
+  console.log('prevTagId: ', prevTagId);
 
   const title = `Релиз №${version} от ${date}`;
 
   const prevTagIndex = commits.indexOf((commit) => commit.id === prevTagId);
+  console.log('prevTagIndex: ', prevTagIndex);
 
   const diffCommits = commits.slice(prevTagIndex);
+  console.log('diffCommits: ', diffCommits);
 
   const commitsString = diffCommits.reduce((result, commit) => {
     return (
