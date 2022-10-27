@@ -13,13 +13,9 @@ jobs:
         with:
           node-version: '16.16.0'
           cache: 'npm'
-          actor: ${{ github.actor }}
-          version: ${{ github.ref}}
-          commits: ${{ github.commits }}
       - run: './gh-test.sh  --if-present'
       - if: startsWith(github.ref, 'refs/tags/v')
         run: |
           ./gh-build.sh --if-present
-          npm install @actions/core
           npm install @actions/github
           node ./util/PATCH.js
