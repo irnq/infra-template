@@ -24,8 +24,12 @@ console.log(commits);
     .rest.repos.listTags({ owner: 'irnq', repo: 'infra-template' });
   const tags = tagsRes.data;
 
-  console.log(tags);
+  console.log(tags.sort((a, b) => (a > b ? 1 : -1)));
+
+  console.log(tags[0].name);
   console.log(tags[0].commit);
+  console.log(tags.at(-1).name);
+  console.log(tags.at(-1).commit);
 
   const description = `ответственный за релиз {orange}(${actor})
 ---
