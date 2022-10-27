@@ -18,53 +18,55 @@ const commitsString = commits.reduce((result, commit) => {
 
 console.log(commits);
 
-const tags = await github
-  .getOctokit(process.env.GH_PAT)
-  .rest.repos.listTags({ owner: 'irnq', repo: 'infra-template' });
+(async () => {
+  const tags = await github
+    .getOctokit(process.env.GH_PAT)
+    .rest.repos.listTags({ owner: 'irnq', repo: 'infra-template' });
 
-console.log(tags.sort((a, b) => (a.name > b.name ? 1 : -1)));
-console.log(tags[0].commit);
+  console.log(tags.sort((a, b) => (a.name > b.name ? 1 : -1)));
+  console.log(tags[0].commit);
 
-const description = `ответственный за релиз {orange}(${actor})
+  const description = `ответственный за релиз {orange}(${actor})
 ---
 коммиты попавшие в релиз:
 ${commitsString}`;
 
-const patchBody = JSON.stringify({
-  summary: title,
-  description,
-});
-
-const options = {
-  host: 'api.tracker.yandex.net',
-  path: '/v2/issues/HOMEWORKSHRI-142',
-  method: 'PATCH',
-  headers: {
-    OrgId: process.env.ORG_ID,
-    Authorization: `OAuth ${process.env.OAUTH_TOKEN}`,
-    'content-type': 'application/json',
-  },
-};
-
-const callback = function (response) {
-  let str = '';
-  response.on('data', function (chunk) {
-    str += chunk;
+  const patchBody = JSON.stringify({
+    summary: title,
+    description,
   });
 
-  response.on('end', function () {
-    console.log(str);
+  const options = {
+    host: 'api.tracker.yandex.net',
+    path: '/v2/issues/HOMEWORKSHRI-142',
+    method: 'PATCH',
+    headers: {
+      OrgId: process.env.ORG_ID,
+      Authorization: `OAuth ${process.env.OAUTH_TOKEN}`,
+      'content-type': 'application/json',
+    },
+  };
+
+  const callback = function (response) {
+    let str = '';
+    response.on('data', function (chunk) {
+      str += chunk;
+    });
+
+    response.on('end', function () {
+      console.log(str);
+    });
+  };
+
+  let req = http.request(options, callback);
+
+  req.on('error', (e) => {
+    console.error(e);
+    throw new Error(`Запрос завершился ошибкой: ${e}`);
   });
-};
 
-let req = http.request(options, callback);
+  req.write(patchBody);
+  req.end();
 
-req.on('error', (e) => {
-  console.error(e);
-  throw new Error(`Запрос завершился ошибкой: ${e}`);
-});
-
-req.write(patchBody);
-req.end();
-
-console.log('данные успешно записаны в трекер!');
+  console.log('данные успешно записаны в трекер!');
+})();
