@@ -2,7 +2,8 @@ name: test and build on release
 run-name: ${{ github.actor }} is learning GitHub Actions
 env:
   OAUTH_TOKEN: ${{ secrets.OAUTH_TOKEN }}
-  ORG_ID: ${{ secrets.ORG_ID}}
+  ORG_ID: ${{ secrets.ORG_ID }}
+  GH_PAT: ${{ secrets.GH_PAT }}
 on: [push]
 jobs:
   test-and-build:

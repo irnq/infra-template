@@ -19,6 +19,8 @@ const commitsString = commits.reduce((result, commit) => {
 console.log(commits);
 console.log('repository');
 console.log(github.context.repository);
+console.log('octokit');
+console.log(github.getOctokit(process.env.GH_PAT));
 
 const description = `ответственный за релиз {orange}(${actor})
 ---
