@@ -19,12 +19,12 @@ const commitsString = commits.reduce((result, commit) => {
 console.log(commits);
 
 (async () => {
-  const tags = await github
+  const tagsRaw = await github
     .getOctokit(process.env.GH_PAT)
     .rest.repos.listTags({ owner: 'irnq', repo: 'infra-template' });
-
-  console.log(tags.sort((a, b) => (a.name > b.name ? 1 : -1)));
-  console.log(tags[0].commit);
+  console.log(tagsRaw);
+  const tags = await JSON.parse(tagsRaw);
+  console.log(tags);
 
   const description = `ответственный за релиз {orange}(${actor})
 ---
