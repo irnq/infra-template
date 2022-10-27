@@ -1,4 +1,4 @@
-FROM alpine:3.15
+FROM node:16
 
 # создание директории приложения
 WORKDIR /usr/src/app
@@ -10,7 +10,7 @@ COPY package*.json ./
 
 # RUN npm install
 # Если вы создаете сборку для продакшн
-RUN npm ci --only=production
+RUN npm ci 
 
 # копируем исходный код
 COPY . .
