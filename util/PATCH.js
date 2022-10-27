@@ -89,4 +89,3 @@ ${commitsString}`;
 
 /* test */
 /* test */
-/* test */
