@@ -31,7 +31,7 @@ const date = new Date().toLocaleDateString();
   const prevTagIndex = commits.indexOf((commit) => commit.id === prevTagId);
   console.log('prevTagIndex: ', prevTagIndex);
 
-  const diffCommits = prevTagIndex === -1 ? commits : commits.slice(prevTagIndex);
+  const diffCommits = commits.slice(prevTagIndex + 1);
   console.log('diffCommits: ', diffCommits);
 
   const commitsString = diffCommits.reduce((result, commit) => {
