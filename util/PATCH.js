@@ -19,22 +19,22 @@ const date = new Date().toLocaleDateString();
     .filter((tag) => tag.name.slice(0, 3) === 'rc-')
     .sort((a, b) => (a > b ? -1 : 1));
 
-  // console.log(tags);
+  console.log(tags);
 
-  // console.log(commits);
+  console.log(commits);
 
-  // const prevTagId = tags[1].commit.sha;
-  // console.log('prevTagId: ', prevTagId);
+  const prevTagId = tags[1].commit.sha;
+  console.log('prevTagId: ', prevTagId);
 
   const title = `Релиз №${version} от ${date}`;
 
-  // const prevTagIndex = commits.indexOf((commit) => commit.id === prevTagId);
-  // console.log('prevTagIndex: ', prevTagIndex);
+  const prevTagIndex = commits.indexOf((commit) => commit.id === prevTagId);
+  console.log('prevTagIndex: ', prevTagIndex);
 
-  // const diffCommits = commits.slice(prevTagIndex);
-  // console.log('diffCommits: ', diffCommits);
+  const diffCommits = prevTagIndex === -1 ? commits : commits.slice(prevTagIndex);
+  console.log('diffCommits: ', diffCommits);
 
-  const commitsString = commits.reduce((result, commit) => {
+  const commitsString = diffCommits.reduce((result, commit) => {
     return (
       result +
       `${commit.id}  -  ${commit.author.name}  -  ${commit.message};
