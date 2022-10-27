@@ -21,7 +21,7 @@ const date = new Date().toLocaleDateString();
 
   console.log(tags);
 
-  console.log(commits.slice(10));
+  console.log(commits);
 
   const prevTagId = tags[1].commit.sha;
   console.log('prevTagId: ', prevTagId);
