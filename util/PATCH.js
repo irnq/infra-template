@@ -28,7 +28,7 @@ const date = new Date().toLocaleDateString();
 
   const title = `Релиз №${version} от ${date}`;
 
-  const prevTagIndex = commits.indexOf((commit) => commit.id === prevTagId);
+  const prevTagIndex = commits.findIndex((commit) => commit.id === prevTagId);
   console.log('prevTagIndex: ', prevTagIndex);
 
   const diffCommits = commits.slice(prevTagIndex + 1);
