@@ -77,7 +77,3 @@ ${commitsString}`;
 
   console.log('данные успешно записаны в трекер!');
 })();
-
-/* test */
-/* test */
-/* test */
