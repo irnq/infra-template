@@ -6,6 +6,7 @@ const version = github.context.ref.split('/').at(-1).replace('rc-', '');
 const commits = github.context.payload.commits;
 const date = new Date().toLocaleDateString();
 
+console.log('Final: Отправим данные в трекер:');
 (async () => {
   const tagsRes = await github
     .getOctokit(process.env.GH_PAT)
