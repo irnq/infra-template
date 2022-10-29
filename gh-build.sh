@@ -1,7 +1,7 @@
 #!/bin/bash
 msg_error="\033[31m"
 msg_ok="\033[32m"
-msg_info="\033[6m"
+msg_info="\033[36m"
 msg_reset="\033[0m"
 
 echo -e "$msg_info #4. Начинаем сборку проекта... $msg_reset"
