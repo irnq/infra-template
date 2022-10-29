@@ -19,7 +19,8 @@ jobs:
       - if: startsWith(github.ref, 'refs/tags/rc-0.0.')
         run: |
           ./gh-build.sh --if-present
-          echo 'собираем докер образ'
-          docker build . -t ${{ env.PROJECT }}:${{ github.ref_name }}
-          echo 'образ успешно собран!'
-          node ./util/PATCH.js
+
+#          echo 'собираем докер образ'
+#          docker build . -t ${{ env.PROJECT }}:${{ github.ref_name }}
+#          echo 'образ успешно собран!'
+#          node ./util/PATCH.js

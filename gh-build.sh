@@ -20,3 +20,5 @@ else
 echo -e "$msg_error Ошибка при установке @actions/github! $msg_common"
 exit 1
 fi
+
+echo "$PROJECT - project"
