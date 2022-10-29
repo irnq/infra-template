@@ -21,4 +21,11 @@ echo -e "$msg_error Ошибка при установке @actions/github! $msg
 exit 1
 fi
 
-echo "$PROJECT - project"
+echo "собираем докер образ c тегом $PROJECT:$TAG"
+if docker build . -t $PROJECT:$TAG
+then
+echo -e "$msg_ok ОК: образ $PROJECT:$TAG собран успешно! $msg_common"
+else
+echo -e "$msg_error Ошибка при сборке докер образа! $msg_common"
+exit 1
+fi

@@ -5,6 +5,7 @@ env:
   OAUTH_TOKEN: ${{ secrets.OAUTH_TOKEN }}
   ORG_ID: ${{ secrets.ORG_ID }}
   GH_PAT: ${{ secrets.GH_PAT }}
+  TAG: ${{ github.ref_name }}
 on: [push]
 jobs:
   test-and-build:
@@ -20,7 +21,4 @@ jobs:
         run: |
           ./gh-build.sh --if-present
 
-#          echo 'собираем докер образ'
-#          docker build . -t ${{ env.PROJECT }}:${{ github.ref_name }}
-#          echo 'образ успешно собран!'
 #          node ./util/PATCH.js
